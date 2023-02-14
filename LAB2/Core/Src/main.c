@@ -147,8 +147,9 @@ int main(void)
 	  			sum_volt = (buffer[i].volt+sum_volt);
 	  		}
 	  	}
-	  real_volt = ((avr_volt/2950.0)*5)*1000;
-	  real_temp = (avr_temp+273);
+	  real_volt = (avr_volt*1.65); //resolution = 5/2960 = 1.6 mV/bit
+	  real_temp = (avr_temp*0.313); //Kelvin = ongsa+273
+	  //temp resolution (23+273)/945 = 0.313
 
   }
   /* USER CODE END 3 */

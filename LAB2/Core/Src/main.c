@@ -46,6 +46,23 @@ UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
 
+//uint32_t ADC_RawData;
+//typedef struct
+//{
+//	ADC_ChannelConfTypeDef Config;
+//	uint16_t data;
+//}ADCStructure;
+//
+//ADCStructure ADCChannel[1];
+uint16_t avr_temp,avr_volt;
+typedef struct
+{
+	uint16_t temp;
+	uint16_t volt;
+}adcDMAStructure;
+
+adcDMAStructure buffer[10];
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -95,7 +112,8 @@ int main(void)
   MX_USART2_UART_Init();
   MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
-
+  HAL_ADC_Start_IT (&hadc1);
+  HAL_ADC_Start_DMA(&hadc1 , (uint32_t*)buffer, 200);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -105,6 +123,8 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+
+
   }
   /* USER CODE END 3 */
 }
@@ -299,6 +319,16 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+void HAL_GPIO_EXIT_Callback(uint16_t GPIO_Pin)
+{
+		HAL_ADC_Start_DMA(&hadc1 , (uint32_t*)buffer, 10);
+}
+
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
+{
+
+}
 
 /* USER CODE END 4 */
 

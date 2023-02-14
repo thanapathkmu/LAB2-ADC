@@ -60,6 +60,7 @@ Mcu.UserConstants=
 Mcu.UserName=STM32F411RETx
 MxCube.Version=6.7.0
 MxDb.Version=DB.6.0.70
+NVIC.ADC_IRQn=true\:0\:0\:false\:false\:true\:true\:true\:true
 NVIC.BusFault_IRQn=true\:0\:0\:false\:false\:true\:true\:false\:false
 NVIC.DMA2_Stream0_IRQn=true\:0\:0\:false\:false\:true\:false\:true\:true
 NVIC.DebugMonitor_IRQn=true\:0\:0\:false\:false\:true\:true\:false\:false

@@ -147,7 +147,7 @@ int main(void)
 	  			sum_volt = (buffer[i].volt+sum_volt);
 	  		}
 	  	}
-	  real_volt = (avr_volt/2950.0)*5;
+	  real_volt = ((avr_volt/2950.0)*5)*1000;
 	  real_temp = (avr_temp+273);
 
   }

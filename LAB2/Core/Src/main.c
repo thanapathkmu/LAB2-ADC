@@ -128,8 +128,10 @@ int main(void)
 	  	{
 	  		if(i == 9)
 	  		{
-	  			avr_temp = sum_temp/9;
-	  			avr_volt = sum_volt/9;
+	  			sum_temp = (buffer[i].temp+sum_temp);
+	  			sum_volt = (buffer[i].volt+sum_volt);
+	  			avr_temp = sum_temp/10;
+	  			avr_volt = sum_volt/10;
 	  		}
 	  		else if(i == 0)
 	  		{

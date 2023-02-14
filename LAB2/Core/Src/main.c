@@ -54,7 +54,8 @@ UART_HandleTypeDef huart2;
 //}ADCStructure;
 //
 //ADCStructure ADCChannel[1];
-uint16_t avr_temp,avr_volt;
+uint32_t avr_temp = 0,avr_volt = 0;
+uint32_t sum_temp = 0,sum_volt = 0;
 typedef struct
 {
 	uint16_t temp;
@@ -113,7 +114,7 @@ int main(void)
   MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
   HAL_ADC_Start_IT (&hadc1);
-  HAL_ADC_Start_DMA(&hadc1 , (uint32_t*)buffer, 200);
+  HAL_ADC_Start_DMA(&hadc1 , (uint32_t*)buffer, 50);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -123,8 +124,26 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-
-
+	  for(uint16_t i = 0 ; i < 10 ; i++)
+	  	{
+	  		if(i == 9)
+	  		{
+	  			avr_temp = sum_temp/9;
+	  			avr_volt = sum_volt/9;
+	  		}
+	  		else if(i == 0)
+	  		{
+	  			sum_temp = 0;
+	  			sum_volt = 0;
+	  			sum_temp = (buffer[i].temp+sum_temp);
+	  			sum_volt = (buffer[i].volt+sum_volt);
+	  		}
+	  		else
+	  		{
+	  			sum_temp = (buffer[i].temp+sum_temp);
+	  			sum_volt = (buffer[i].volt+sum_volt);
+	  		}
+	  	}
   }
   /* USER CODE END 3 */
 }

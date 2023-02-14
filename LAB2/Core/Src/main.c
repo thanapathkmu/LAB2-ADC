@@ -56,6 +56,7 @@ UART_HandleTypeDef huart2;
 //ADCStructure ADCChannel[1];
 uint32_t avr_temp = 0,avr_volt = 0;
 uint32_t sum_temp = 0,sum_volt = 0;
+float real_volt = 0, real_temp = 0;
 typedef struct
 {
 	uint16_t temp;
@@ -146,6 +147,9 @@ int main(void)
 	  			sum_volt = (buffer[i].volt+sum_volt);
 	  		}
 	  	}
+	  real_volt = (avr_volt/2950.0)*5;
+	  real_temp = (avr_temp+273);
+
   }
   /* USER CODE END 3 */
 }
